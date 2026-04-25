@@ -1,7 +1,6 @@
-export default function AboutPage() {
-    return (
-        <div>
-            <p>About page </p>
-        </div>
-    );
+
+export const about = () => {
+  return (
+    <div>about</div>
+  )
 }

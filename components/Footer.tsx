@@ -1,7 +1,9 @@
-export default function Footer() {
-    return (
-        <footer>
-            <p>&copy; {new Date().getFullYear()} My App. All rights reserved.</p>
-        </footer>
-    );
+
+export const Footer = () => {
+  return (
+    <div>
+        <div className="bg-red color-white">&copy; {new Date().getFullYear()} My App. All rights reserved.</div>
+       
+    </div>
+  )
 }
