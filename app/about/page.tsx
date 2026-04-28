@@ -4,3 +4,4 @@ export const about = () => {
     <div>about</div>
   )
 }
+export default about;
