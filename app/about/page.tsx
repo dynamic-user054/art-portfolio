@@ -1,6 +1,6 @@
 import { NavBar } from "@/components/NavBar";
 
-export const about = () => {
+export default function About(){
   return (
     <div>
       <NavBar />
@@ -8,4 +8,3 @@ export const about = () => {
     </div>
   )
 }
-export default about;

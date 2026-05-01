@@ -1,11 +1,9 @@
 import { NavBar } from "@/components/NavBar";
 
-export const gallery = () => {
+export default function Gallery(){
 
-
-  const photos =[]
   return (
-    <div className="flex flex col">
+    <div className="flex flex-col">
     <NavBar/>
     <div>Gallery</div>
     <div className="flex flex-col justify-evenly">
@@ -18,4 +16,3 @@ export const gallery = () => {
       </div>
   );
 }
-export default gallery;
