@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { HomeIcon, Image as ImageIcon, Info, Moon, Sun } from "lucide-react";
+import { HomeIcon, Image as ImageIcon, Info, Moon, Sun ,MessageSquare as Contact} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
@@ -8,7 +8,8 @@ export const NavBar = () => {
   const navItems = [
     { to: "/", label: "Home", Icon: HomeIcon },
     { to: "/gallery", label: "Gallery", Icon: ImageIcon },
-    { to: "/about", label: "About", Icon: Info },
+    { to: "/contact", label: "Contact", Icon: Contact },
+    { to: "/about", label: "About", Icon: Info }
   ];
 
   const [mounted, setMounted] = useState(false);
