@@ -52,7 +52,7 @@ export function HeroSlider({
   if (!slides.length) return null;
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20 bg-background">
+    <section className="w-full pt-20 sm:pt-24 py-12 sm:py-16 lg:py-20 bg-background">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         
         <div 
@@ -68,7 +68,7 @@ export function HeroSlider({
               }`}
             >
               <div className="relative w-full flex justify-center">
-                <div className="relative border-8 border-border rounded-sm shadow-2xl shadow-black/10 dark:shadow-black/30 bg-background">
+                <div className="relative border-8px border-t-20 border-transparent rounded-sm shadow-2xl shadow-black/10 dark:shadow-black/30 bg-background">
                   <Image
                     src={slide.src}
                     alt={slide.alt}
