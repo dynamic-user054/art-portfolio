@@ -2,17 +2,19 @@
 
 import { Mail, ArrowUp } from "lucide-react";
 import { config } from "@/lib/config";
+
 export const Footer = () => {
   return (
-    <footer className="w-full border-t border-border bg-muted/30 dark:bg-muted/20">
+    <footer className="w-full border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+
           <div className="text-center sm:text-left">
             <h3 className="text-lg font-serif tracking-wide text-foreground">
               {config.name}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {config.copyright}
+              {config.copyright || `© ${new Date().getFullYear()} All rights reserved.`}
             </p>
           </div>
 
@@ -40,7 +42,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-between border-t border-border/60 pt-6">
+        <div className="mt-8 flex items-center justify-between border-t border-border pt-6">
           <p className="text-xs text-muted-foreground italic">
             {config.tagline}
           </p>

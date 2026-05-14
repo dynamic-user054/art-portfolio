@@ -1,5 +1,5 @@
 import { Footer } from "@/components/Footer";
-import { NavBar } from "@/components/NavBar";
+import { Header } from "@/components/Header";
 import { supabase } from "@/lib/supabaseClient";
 import Image from "next/image";
 
@@ -9,8 +9,8 @@ export default async function Gallery() {
   if (error) {
     return (
       <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <NavBar />
-        <div className="flex flex-1 items-center justify-center p-8 text-center">
+        <Header />
+        <div className="flex flex-1 items-center justify-center p-8 pt-24 text-center">
           <div>
             <p className="mb-2 text-lg font-medium text-red-500">Failed to load gallery</p>
             <p className="text-muted-foreground">{error.message}</p>
@@ -23,8 +23,8 @@ export default async function Gallery() {
   if (!photos?.length) {
     return (
       <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <NavBar />
-        <main className="flex flex-1 items-center justify-center p-8 text-center">
+        <Header />
+        <main className="flex flex-1 items-center justify-center p-8 pt-24 text-center">
           <div className="max-w-md">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
               <svg className="h-8 w-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,8 +40,8 @@ export default async function Gallery() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <NavBar />
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
+      <Header />
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pt-24 pb-10 sm:px-6 lg:px-8">
         <div className="mb-10 sm:mb-14">
           <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
             Gallery
