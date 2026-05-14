@@ -17,7 +17,7 @@ interface HeroSliderProps {
 
 export function HeroSlider({ 
   slides, 
-  autoSlideInterval = 5000 
+  autoSlideInterval = 6000 
 }: HeroSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -52,88 +52,94 @@ export function HeroSlider({
   if (!slides.length) return null;
 
   return (
-    <div 
-      className="relative w-full h-screen overflow-hidden bg-background"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {slides.map((slide, index) => (
-        <div
-          key={slide.src}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out flex items-center justify-center ${
-            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-          }`}
+    <section className="w-full py-12 sm:py-16 lg:py-20 bg-background">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-8">
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              width={1920}
-              height={1080}
-              className="max-w-full max-h-[85vh] w-auto h-auto object-contain"
-              priority={index === 0}
-              quality={90}
-            />
-          </div>
-          
-          {(slide.title || slide.caption) && (
-            <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10 pointer-events-none">
-              <div className="text-center px-4 max-w-3xl">
-                {slide.title && (
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
-                    {slide.title}
-                  </h2>
-                )}
-                {slide.caption && (
-                  <p className="mt-2 text-base sm:text-lg text-muted-foreground bg-background/60 backdrop-blur-sm px-3 py-1.5 rounded inline-block">
-                    {slide.caption}
-                  </p>
-                )}
+          {slides.map((slide, index) => (
+            <div
+              key={slide.src}
+              className={`transition-opacity duration-1000 ease-in-out overflow-hidden ${
+                index === currentIndex ? "opacity-100" : "opacity-0 absolute inset-0 pointer-events-none"
+              }`}
+            >
+              <div className="relative w-full flex justify-center">
+                <div className="relative border-8 border-border rounded-sm shadow-2xl shadow-black/10 dark:shadow-black/30 bg-background">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={1200}
+                    height={900}
+                    className="w-full max-h-[70vh] object-contain"
+                    priority={index === 0}
+                    quality={90}
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                  />
+                </div>
               </div>
+
+              {(slide.title || slide.caption) && (
+                <div className="mt-6 text-center">
+                  {slide.title && (
+                    <h2 className="text-xl sm:text-2xl font-bold text-foreground">
+                      {slide.title}
+                    </h2>
+                  )}
+                  {slide.caption && (
+                    <p className="mt-2 text-base text-muted-foreground">
+                      {slide.caption}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {slides.length > 1 && (
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full pt-6 z-10 flex gap-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-foreground scale-110"
+                      : "bg-foreground/30 hover:bg-foreground/60"
+                  }`}
+                />
+              ))}
             </div>
           )}
-        </div>
-      ))}
 
-      {slides.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? "bg-foreground scale-125"
-                  : "bg-foreground/40 hover:bg-foreground/70"
-              }`}
-            />
-          ))}
+          {slides.length > 1 && (
+            <>
+              <button
+                onClick={() => goToSlide((currentIndex - 1 + slides.length) % slides.length)}
+                aria-label="Previous slide"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-background border border-border text-foreground hover:bg-muted transition shadow-lg"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => goToSlide((currentIndex + 1) % slides.length)}
+                aria-label="Next slide"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-background border border-border text-foreground hover:bg-muted transition shadow-lg"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
         </div>
-      )}
-
-      {slides.length > 1 && (
-        <>
-          <button
-            onClick={() => goToSlide((currentIndex - 1 + slides.length) % slides.length)}
-            aria-label="Previous slide"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-background/80 text-foreground hover:bg-background transition shadow-lg"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => goToSlide((currentIndex + 1) % slides.length)}
-            aria-label="Next slide"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-background/80 text-foreground hover:bg-background transition shadow-lg"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }
